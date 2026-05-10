@@ -68,7 +68,7 @@ export const submitCode = (matchId: string, code: string) =>
   });
 
 export const getMatchHistory = () =>
-  req<{ matches: MatchSummary[] }>("/api/match");
+  req<{ matches: MatchSummary[] }>("/api/match/history");
 
 export const getReplay = (matchId: string) =>
   req<{ snapshots: Snapshot[]; commentary: Commentary[] }>(
