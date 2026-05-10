@@ -94,11 +94,25 @@ export default function PlayPage() {
     } else if (msg.type === "commentary") {
       setCommentary((prev) => [...prev, msg.text]);
     } else if (msg.type === "run_result") {
-      // opponent run result
+      // opponent run result — could surface this in UI later
     } else if (msg.type === "match_event") {
       if (msg.event === "match_finished") {
         setFinished(true);
-        setWinnerMsg("Match over! Check the result.");
+        const m = msg as typeof msg & { winner?: string };
+        if (match && m.winner) {
+          setWinnerMsg(
+            m.winner === match.player
+              ? "You won! All hidden tests passed."
+              : "Opponent won. They passed all hidden tests."
+          );
+        } else {
+          setWinnerMsg("Match over.");
+        }
+      } else if (msg.event === "player_joined") {
+        const m = msg as typeof msg & { status?: string };
+        if (m.status) setStatus(m.status);
+      } else if (msg.event === "player_disconnected") {
+        // Opponent disconnected — could show a banner. For now just log.
       }
     }
   }
