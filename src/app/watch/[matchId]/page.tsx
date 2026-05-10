@@ -8,7 +8,7 @@ import type { Match } from "@/lib/api";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/+$/, "");
 
 interface CommentaryLine {
   id: number;

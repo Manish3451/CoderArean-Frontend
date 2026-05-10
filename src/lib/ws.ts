@@ -1,5 +1,6 @@
 const WS_BASE =
   (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000")
+    .replace(/\/+$/, "")
     .replace(/^http/, "ws");
 
 export type WsMessage =

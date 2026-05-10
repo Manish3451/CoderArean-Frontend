@@ -64,7 +64,7 @@ export default function PlayPage() {
 
     // Get session token from API
     fetch(
-      `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/auth/token`,
+      `${(process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/+$/, "")}/auth/token`,
       { credentials: "include" }
     )
       .then((r) => r.json())

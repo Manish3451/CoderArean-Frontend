@@ -1,4 +1,6 @@
-const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+// Strip trailing slash so both `https://api.example.com` and `https://api.example.com/`
+// produce the same URL when concatenated with a path that starts with `/`.
+const API = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/+$/, "");
 
 async function req<T>(path: string, init: RequestInit = {}): Promise<T> {
   const res = await fetch(`${API}${path}`, {
